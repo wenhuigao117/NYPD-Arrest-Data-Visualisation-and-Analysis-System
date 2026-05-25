@@ -1,0 +1,109 @@
+<h1>Filter Arrest Records</h1>
+
+<form method="get" action="/arrests/filter">
+
+  <label for="borough">Borough:</label>
+  <select name="borough" id="borough">
+    <option value="">-- Any --</option>
+    <option value="M">Manhattan</option>
+    <option value="K">Brooklyn</option>
+    <option value="Q">Queens</option>
+    <option value="B">Bronx</option>
+    <option value="S">Staten Island</option>
+  </select>
+
+  <br><br>
+
+  <label for="precinct">Precinct (1-123):</label>
+  <input type="number" name="precinct" id="precinct" min="1" max="123">
+
+  <br><br>
+
+  <label for="age_group">Age Group:</label>
+  <select name="age_group" id="age_group">
+    <option value="">-- Any --</option>
+    <option value="<18">&lt;18</option>
+    <option value="18-24">18-24</option>
+    <option value="25-44">25-44</option>
+    <option value="45-64">45-64</option>
+    <option value="65+">65+</option>
+    <option value="null">null</option>
+  </select>
+
+  <br><br>
+
+  <label for="gender">Gender:</label>
+  <select name="gender" id="gender">
+    <option value="">-- Any --</option>
+    <option value="M">M</option>
+    <option value="F">F</option>
+    <option value="U">U</option>
+  </select>
+
+  <br><br>
+
+  <label for="race">Race:</label>
+  <select name="race" id="race">
+    <option value="">-- Any --</option>
+    <option value="WHITE">WHITE</option>
+    <option value="WHITE HISPANIC">WHITE HISPANIC</option>
+    <option value="BLACK">BLACK</option>
+    <option value="BLACK HISPANIC">BLACK HISPANIC</option>
+    <option value="ASIAN / PACIFIC ISLANDER">ASIAN / PACIFIC ISLANDER</option>
+    <option value="AMERICAN INDIAN / ALASKAN NATIVE">AMERICAN INDIAN / ALASKAN NATIVE</option>
+    <option value="UNKNOWN">UNKNOWN</option>
+  </select>
+
+  <br><br>
+
+  <button type="submit">Apply Filter</button>
+</form>
+
+<br>
+
+{{#if arrests}}
+{{#if arrests.length}}
+
+<div class="filter-results-page">
+  <div class="filter-results-container">
+
+    <div class="filter-results">
+      <h3>Filtered Results ({{arrests.length}} records)</h3>
+
+      <div class="export-buttons">
+        <a href="/arrests/filter/export/csv?{{queryString}}" class="export-btn csv-btn">
+          Export to CSV
+        </a>
+        <a href="/arrests/filter/export/pdf?{{queryString}}" class="export-btn pdf-btn">
+          Export to PDF
+        </a>
+      </div>
+
+      <div class="filter-cards">
+        {{#each arrests}}
+          <div class="filter-card">
+            <h4 class="filter-offense">
+              <a href="/arrests/{{this._id}}">
+                {{this.offense_description}}
+              </a>
+            </h4>
+
+          <div class="filter-meta">
+            <span><strong>Borough:</strong> {{this.borough}}</span>
+            <span><strong>Date:</strong> {{this.arrest_date}}</span>
+          </div>
+      </div>
+  {{/each}}
+</div>
+    </div>
+
+  </div>
+</div>
+
+{{else}}
+<p>No matching records found.</p>
+{{/if}}
+{{/if}}
+
+<!-- Load your filter JS file AFTER all HTML has loaded - Shravani added this-->
+<script src="/public/js/filters.js"></script>

@@ -1,0 +1,24 @@
+{
+  "name": "cs546_finalproject_group28",
+  "version": "1.0.0",
+  "description": "NYC Arrest Data Visualization and Analysis System - Final Project for CS546",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "seed": "node tasks/seed.js"
+  },
+  "author": "Wenhui Gao",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "chart.js": "^4.5.1",
+    "express": "^4.19.0",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.17.3",
+    "mongodb": "^6.3.0",
+    "morgan": "^1.10.0",
+    "pdf-lib": "^1.17.1",
+    "xss": "^1.0.15"
+  }
+}

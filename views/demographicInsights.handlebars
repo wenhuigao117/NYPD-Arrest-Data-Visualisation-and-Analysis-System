@@ -1,0 +1,138 @@
+<div class="demographics-page">
+  <header class="demographics-header">
+    <h1><i class="chart-icon">📊</i> Demographic Insights</h1>
+    <p class="header-subtitle">Comprehensive analysis of NYC arrest patterns by demographics</p>
+  </header>
+
+  <!-- Key Statistics Summary - Moved to Top -->
+  <section class="key-stats-section">
+    <h2 class="visually-hidden">Key Demographic Statistics</h2>
+    <div class="stats-grid">
+      <div class="stat-card stat-total">
+        <div class="stat-icon">📋</div>
+        <div class="stat-content">
+          <span class="stat-label">Total Arrests</span>
+          <span id="totalArrestsCount" class="stat-number">Loading...</span>
+        </div>
+      </div>
+      <div class="stat-card stat-age">
+        <div class="stat-icon">👤</div>
+        <div class="stat-content">
+          <span class="stat-label">Common Age Group</span>
+          <span id="mostCommonAge" class="stat-number">Loading...</span>
+        </div>
+      </div>
+      <div class="stat-card stat-gender">
+        <div class="stat-icon">⚖️</div>
+        <div class="stat-content">
+          <span class="stat-label">Gender Ratio (M:F)</span>
+          <span id="genderRatio" class="stat-number">Loading...</span>
+        </div>
+      </div>
+      <div class="stat-card stat-race">
+        <div class="stat-icon">🌍</div>
+        <div class="stat-content">
+          <span class="stat-label">Top Demographic</span>
+          <span id="mostRepresentedRace" class="stat-number">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Charts Section -->
+  <section class="charts-section">
+    <div class="section-header">
+      <h2>Demographic Breakdown</h2>
+      <p>Visual analysis of arrest data across different demographic categories</p>
+    </div>
+
+    <div class="charts-grid">
+      <!-- Row 1: Primary Demographics -->
+      <div class="chart-card chart-card-primary">
+        <div class="chart-header">
+          <h3>🎂 Age Distribution</h3>
+          <span class="chart-badge">Doughnut</span>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="ageGroupChart"></canvas>
+        </div>
+        <p class="chart-description">Breakdown of arrests by age group categories</p>
+      </div>
+
+      <div class="chart-card chart-card-primary">
+        <div class="chart-header">
+          <h3>⚥ Gender Distribution</h3>
+          <span class="chart-badge">Pie</span>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="genderChart"></canvas>
+        </div>
+        <p class="chart-description">Male vs Female arrest proportions</p>
+      </div>
+
+      <div class="chart-card chart-card-wide">
+        <div class="chart-header">
+          <h3>🌎 Race/Ethnicity Distribution</h3>
+          <span class="chart-badge">Bar</span>
+        </div>
+        <div class="chart-wrapper chart-wrapper-wide">
+          <canvas id="raceChart"></canvas>
+        </div>
+        <p class="chart-description">Arrest distribution across racial and ethnic groups</p>
+      </div>
+
+      <!-- Row 2: Cross-tabulations -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>🗽 Borough Demographics</h3>
+          <span class="chart-badge">Grouped Bar</span>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="boroughDemographicChart"></canvas>
+        </div>
+        <p class="chart-description">Age group distribution across NYC boroughs</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>👥 Age × Gender</h3>
+          <span class="chart-badge">Stacked</span>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="ageGenderChart"></canvas>
+        </div>
+        <p class="chart-description">Gender breakdown within each age category</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>📍 Race × Borough</h3>
+          <span class="chart-badge">Radar</span>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="raceBoroughChart"></canvas>
+        </div>
+        <p class="chart-description">Racial composition patterns across boroughs</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Section -->
+  <section class="info-section">
+    <div class="info-card">
+      <div class="info-icon">ℹ️</div>
+      <div class="info-content">
+        <h3>About This Data</h3>
+        <p>
+          This demographic analysis is based on NYPD arrest records. The visualizations 
+          help identify patterns and potential disparities in enforcement across different 
+          population groups. Data should be interpreted in context of community demographics,
+          socioeconomic factors, and policing practices.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/public/js/demographics.js"></script>

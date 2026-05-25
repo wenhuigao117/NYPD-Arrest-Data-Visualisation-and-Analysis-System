@@ -1,0 +1,133 @@
+<div class="home-container">
+  {{!-- Hero Section --}}
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">NYC Arrest Data Visualization and Analysis System</h1>
+      <p class="hero-subtitle">Explore arrest patterns across time, geography, and demographics</p>
+      <div class="hero-actions">
+        <a href="/arrests" class="btn btn-primary btn-lg">Explore Data</a>
+        <a href="/help" class="btn btn-secondary btn-lg">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  {{!-- Core Features Section --}}
+  <section class="features-section">
+    <div class="section-header">
+      <h2 class="section-title">Core Features</h2>
+      <p class="section-description">Required project functionalities as specified in our proposal</p>
+    </div>
+
+    <div class="feature-grid">
+      {{!-- Browse Arrest Records --}}
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Browse Arrest Records</h3>
+        <p class="feature-description">View all arrest records with pagination and efficient data access</p>
+        <a href="/arrests" class="btn btn-primary">Browse Arrests →</a>
+      </div>
+
+      {{!-- Search and Filtering --}}
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3 class="feature-title">Search & Filter</h3>
+        <p class="feature-description">Search and filter by borough, date range, or offense type</p>
+        <a href="/arrests/filter" class="btn btn-primary">Start Filtering →</a>
+      </div>
+
+      {{!-- Detailed View --}}
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <h3 class="feature-title">Detailed View</h3>
+        <p class="feature-description">Sort and view comprehensive details for each arrest record</p>
+        <a href="/arrests" class="btn btn-primary">View Details →</a>
+      </div>
+
+      {{!-- Statistical Dashboard --}}
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3 class="feature-title">Statistical Dashboard</h3>
+        <p class="feature-description">Summary dashboard with total arrests, major crime categories, and borough comparisons</p>
+        <a href="/stats" class="btn btn-primary">View Dashboard →</a>
+      </div>
+
+      {{!-- Demographic Insights --}}
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3 class="feature-title">Demographic Insights</h3>
+        <p class="feature-description">Demographic breakdowns by age, gender, and race across regions</p>
+        <a href="/demographics" class="btn btn-primary">View Demographics →</a>
+      </div>
+
+      {{!-- User Comments --}}
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3 class="feature-title">User Comments</h3>
+        <p class="feature-description">Registered users can add notes and comments on trends and findings</p>
+        {{#if user}}
+          <a href="/arrests" class="btn btn-primary">Add Comments →</a>
+        {{else}}
+          <a href="/users/login" class="btn btn-primary">Login to Comment →</a>
+        {{/if}}
+      </div>
+
+      {{!-- Time-Series Trends --}}
+      <div class="feature-card">
+        <div class="feature-icon">📉</div>
+        <h3 class="feature-title">Time-Series Trends</h3>
+        <p class="feature-description">Visualize monthly and weekly arrest counts to observe temporal changes</p>
+        <div class="btn-group">
+          <a href="/trends/monthly" class="btn btn-primary">Monthly →</a>
+          <a href="/trends/weekly" class="btn btn-primary">Weekly →</a>
+        </div>
+      </div>
+
+      {{!-- Crime Category Ranking --}}
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3 class="feature-title">Crime Ranking</h3>
+        <p class="feature-description">Identify the most frequent offenses citywide</p>
+        <a href="/arrests/ranking" class="btn btn-primary">View Ranking →</a>
+
+      </div>
+    </div>
+  </section>
+
+
+  {{!-- Extra Features Section --}}
+  <section class="features-section extra-features">
+    <div class="section-header">
+      <h2 class="section-title">Extra Features</h2>
+      <p class="section-description">Bonus implementations for enhanced user experience</p>
+    </div>
+
+    <div class="feature-grid">
+      {{!-- Data Export --}}
+      <div class="feature-card">
+        <div class="feature-icon">📥</div>
+        <h3 class="feature-title">Data Export & Reporting</h3>
+        <p class="feature-description">Export filtered arrest results to CSV or PDF files for reporting</p>
+        <a href="/arrests/filter" class="btn btn-primary">Export Data →</a>
+      </div>
+
+
+      {{!-- Help & FAQ --}}
+      <div class="feature-card">
+        <div class="feature-icon">❓</div>
+        <h3 class="feature-title">Help & FAQ</h3>
+        <p class="feature-description">Learn about system features and get answers to common questions</p>
+        <a href="/help" class="btn btn-primary">Open Help →</a>
+      </div>
+    </div>
+  </section>
+
+
+  {{!-- Project Information --}}
+  <section class="project-info-section">
+    <div class="project-info-content">
+      <h3>CS-546 Final Project - Group 28</h3>
+      <p>All features listed above are implemented as specified in our project proposal</p>
+      <p class="text-muted">Data source: NYC Open Data - NYPD Arrest Data (Year to Date)</p>
+    </div>
+  </section>
+</div>

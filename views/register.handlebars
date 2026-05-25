@@ -1,0 +1,92 @@
+{{!-- register page placeholder --}}
+<div class="register-container">
+    <h1>User Registration</h1>
+
+    {{#if error}}
+    <p class="error-text">{{error}}</p>
+    {{/if}}
+
+    <form id="register-form" method="post" action="/users/register" onsubmit="return validatePasswords()">
+
+        <label for="username">Username:</label>
+        <input class="input-field" type="text" id="username" name="username" placeholder="Choose a username" required>
+
+        <br>
+
+        <label for="email">Email:</label>
+        <input class="input-field" type="email" id="email" name="email" placeholder="your@email.com" required>
+
+        <br>
+
+        <label for="password">Password:</label>
+        <input class="input-field" type="password" id="password" name="password" placeholder="Min 8 chars, 1 uppercase, 1 number, 1 special char" required minlength="8">
+
+        <br>
+
+        <label for="confirmPassword">Confirm Password:</label>
+        <input class="input-field" type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" required minlength="8">
+
+        <br>
+
+        <button id="submitButton" class="submit-button" type="submit">Register</button>
+
+    </form>
+    <p>
+        Already have an account?
+        <a class="link-text" href="/users/login">Log in here</a>
+    </p>
+</div>
+
+<script>
+    function validatePasswords() {
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        
+        // Validate username
+        if (username.length < 3) {
+            alert('Username must be at least 3 characters long');
+            return false;
+        }
+        
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            return false;
+        }
+        
+        // Validate password length
+        if (password.length < 8) {
+            alert('Password must be at least 8 characters long');
+            return false;
+        }
+        
+        // Validate uppercase letter
+        if (!/[A-Z]/.test(password)) {
+            alert('Password must contain at least one uppercase letter');
+            return false;
+        }
+        
+        // Validate number
+        if (!/[0-9]/.test(password)) {
+            alert('Password must contain at least one number');
+            return false;
+        }
+        
+        // Validate special character
+        if (!/[!@#$%^&*(),.?":{}|<>_\-+=]/.test(password)) {
+            alert('Password must contain at least one special character (!@#$%^&*...)');
+            return false;
+        }
+        
+        // Validate password match
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return false;
+        }
+        
+        return true;
+    }
+</script>

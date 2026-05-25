@@ -1,0 +1,55 @@
+{{!-- user profile page placeholder --}}
+<h1 class="page-title">My Profile</h1>
+
+<div class="profile-container">
+
+    <div class="profile-section">
+        <h2>User Information</h2>
+
+        <p><strong>Username:</strong> {{user.username}}</p>
+        <p><strong>Email:</strong> {{user.email}}</p>
+
+        {{#if user.createdAt}}
+        <p><strong>Member Since:</strong> {{user.createdAt}}</p>
+        {{/if}}
+    </div>
+
+    <hr>
+
+    <div class="profile-section">
+        <h2>My Favorite Arrests</h2>
+
+        {{#if user.favorites.length}}
+            <ul>
+            {{#each user.favorites}}
+                <li>
+                    <a href="/arrests/{{this}}">
+                        View Arrest {{this}}
+                    </a>
+                </li>
+            {{/each}}
+            </ul>
+        {{else}}
+            <p>You have no favorite arrests yet.</p>
+        {{/if}}
+    </div>
+
+    <hr>
+
+    <div class="profile-section">
+        <h2>My Comments</h2>
+
+        <p>
+            <a href="/comments/user/{{user._id}}">
+                View all my comments
+            </a>
+        </p>
+    </div>
+
+    <hr>
+
+    <div class="profile-section">
+        <a href="/users/logout" class="logout-btn">Log Out</a>
+    </div>
+
+</div>

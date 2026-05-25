@@ -1,0 +1,208 @@
+{{!-- views/help.handlebars --}}
+<div class="page page-help">
+
+  <!-- Top hero / banner -->
+  <section class="help-hero">
+    <div class="help-hero-content">
+      <h1>Need Help Using the NYC Arrest Data Explorer?</h1>
+      <p>
+        This page explains how the site works, where the data comes from,
+        and how to get the most out of filters, trends, and the statistical dashboard.
+        It’s meant to guide both first-time visitors and students doing deeper analysis.
+      </p>
+      <div class="help-hero-tags">
+        <span>New to the site</span>
+        <span>Doing research / class project</span>
+        <span>Just exploring patterns</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick-start cards -->
+  <section class="help-quick-grid">
+    <h2 class="visually-hidden">Quick Help Topics</h2>
+    <article class="help-card">
+      <h2>1. New Here?</h2>
+      <p>
+        Start on the <strong>Home</strong> page to see what this project does.
+        Then browse a few arrest records to get a feel for the fields and layout.
+      </p>
+      <ul>
+        <li>Use the navbar to move between pages.</li>
+        <li>Hover over charts to see exact values.</li>
+        <li>Come back to Help &amp; FAQ anytime you’re stuck.</li>
+      </ul>
+    </article>
+
+    <article class="help-card">
+      <h2>2. Exploring the Data</h2>
+      <p>
+        Use <strong>Filter &amp; Search</strong> to narrow arrests by borough,
+        precinct, offense, demographics, and date. This is the best place for
+        focused analysis.
+      </p>
+      <ul>
+        <li>Combine borough + offense + age group filters.</li>
+        <li>Compare patterns across different boroughs.</li>
+        <li>Use filtered results to guide what you look at in the dashboard.</li>
+      </ul>
+    </article>
+
+    <article class="help-card">
+      <h2>3. Looking for Trends</h2>
+      <p>
+        Visit the <strong>Statistical Dashboard</strong> and the
+        <strong>Monthly / Weekly Trends</strong> pages to see the bigger picture
+        over time.
+      </p>
+      <ul>
+        <li>Check total arrests and the most common offense.</li>
+        <li>See which borough has the highest arrest volume.</li>
+        <li>Track how arrests change month-to-month and week-to-week.</li>
+      </ul>
+    </article>
+
+    <article class="help-card">
+      <h2>4. Doing Research or a Class Project</h2>
+      <p>
+        Use this app as a <strong>learning dataset</strong> based on real NYC Open
+        Data, sampled to keep things fast for coursework and experimentation.
+      </p>
+      <ul>
+        <li>Great for homework, slides, and quick experiments.</li>
+        <li>Patterns are realistic, but totals won’t match official NYPD counts.</li>
+        <li>Always cite the original NYC Open Data source in your report.</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- How to use this site (short, structured) -->
+  <section class="help-section">
+    <h2>How This Site Is Organized</h2>
+    <div class="help-two-column">
+      <div>
+        <h3>Home</h3>
+        <p>
+          High-level introduction and core feature cards
+          (Browse Arrests, Filter &amp; Search, Crime Ranking, Trends).
+        </p>
+
+        <h3>Browse Arrests</h3>
+        <p>
+          Paginated table of individual arrest records with details like
+          date, borough, offense description, law category, age group, gender,
+          race, and approximate location.
+        </p>
+
+        <h3>Filter &amp; Search</h3>
+        <p>
+          Advanced filters to narrow down arrests by borough, precinct,
+          offense, law category (felony / misdemeanor / violation),
+          age group, gender, and race. Use this when you want a very
+          specific slice of the data.
+        </p>
+      </div>
+
+      <div>
+        <h3>Crime Ranking</h3>
+        <p>
+          Aggregates the data to show which offenses appear most frequently
+          across NYC. Helpful for quickly spotting the top recurring charges.
+        </p>
+
+        <h3>Statistical Dashboard</h3>
+        <p>
+          Shows a summary view:
+          total arrests, most common offense, top borough,
+          approximate average age, and live charts for arrests by borough
+          and monthly trends <strong>computed from the current dataset</strong>
+          (not hard-coded numbers).
+        </p>
+
+        <h3>Monthly &amp; Weekly Trends</h3>
+        <p>
+          Visualizes total arrests over time using real arrest dates.
+          Monthly trends show the broader pattern; weekly trends highlight
+          shorter-term spikes and dips.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ section -->
+  <section class="help-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <h3>Where does the data come from?</h3>
+      <p>
+        All records are pulled from the official
+        <strong>NYC Open Data API</strong> for NYPD arrests. Our backend fetches
+        the data in pages, cleans it, and stores a curated subset in our own
+        MongoDB database for faster queries and visualizations.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What time period does the data cover?</h3>
+      <p>
+        The dataset reflects the latest available months of the current year
+        from NYC Open Data. In our current setup, the records typically span
+        from <strong>January through September</strong>, depending on what the
+        API has published when we seed the database.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Why do you use stratified sampling instead of every single record?</h3>
+      <p>
+        The full NYC arrest dataset is very large. For this project,
+        we fetch tens of thousands of rows from the API and then perform
+        <strong>stratified sampling by borough</strong> (around 400 records per
+        borough). This keeps the app responsive while still preserving
+        realistic borough-level and temporal patterns.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How often can the data be updated?</h3>
+      <p>
+        The data can be refreshed any time by re-running the seeding script.
+        Each run pulls the latest NYC Open Data records, re-samples them, and
+        recalculates the monthly and weekly trends that power the charts.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Why do some charts show “(Dataset)” vs “(Sample)”? </h3>
+      <p>
+        When everything loads correctly from the database, the charts display
+        labels like <strong>(Dataset)</strong> to indicate they are based on
+        real aggregated values. If something goes wrong (for example, the DB is
+        empty or an API call fails), the app falls back to a small built-in
+        sample so the page still renders, labeled as <strong>(Sample)</strong>.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Do I need an account to use this?</h3>
+      <p>
+        No account is required for basic exploration, filtering, and viewing
+        charts. If we later add features like saved views or favorites,
+        those may require login, but the core visualizations remain open.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What if something looks wrong or confusing?</h3>
+      <p>
+        Because this is a course project, we intentionally include safety
+        checks and defaults. If a number or chart looks strange, it might be
+        due to sampling, API limits, or how NYC reports certain categories.
+        You can always re-seed the database or cross-check against the
+        original NYC Open Data portal.
+      </p>
+    </div>
+  </section>
+
+</div>

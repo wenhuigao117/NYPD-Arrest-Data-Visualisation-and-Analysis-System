@@ -1,0 +1,71 @@
+{{!-- views/stats.handlebars --}}
+
+<section class="page-container">
+    <header class="page-header">
+        <h1>Statistical Dashboard</h1>
+        <p class="page-subtitle">
+            High-level overview of NYC arrest patterns, hotspots, and trends.
+        </p>
+    </header>
+
+    {{!-- KPI tiles --}}
+    <section class="stats-grid">
+        <h2 class="visually-hidden">Dashboard Summary Statistics</h2>
+        <article class="stats-card">
+            <h3> Total Arrests</h3>
+            <p class="stat-value">{{stats.totalArrests}}</p>
+            <p class="stat-notes">Across the full dataset</p>
+        </article>
+
+        <article class="stat-card">
+            <h3>Most Common Offense</h3>
+            <p class="stat-value">{{stats.mostCommonCrime}}</p>
+            <p class="stat-note">Dominant arrest charge description</p>
+        </article>
+
+        <article class="stat-card">
+            <h3>Top Borough</h3>
+            <p class="stat-value">{{stats.boroughWithMostArrests}}</p>
+            <p class="stat-note">Highest arrest volume</p>
+        </article>
+
+        <article class="stat-card">
+            <h3>Average Age</h3>
+            <p class="stat-value">{{stats.avgAge}}</p>
+            <p class="stat-note">Approximate across all arrests</p>
+        </article>
+    </section>
+
+    {{!-- Charts Section --}}
+    <section class="charts-row">
+        <div class="chart-card">
+            <h2>Arrests by Borough</h2>
+            <p class="chart-subtitle">
+                Comparing total arrests across NYC boroughs.
+            </p>
+            <canvas id="boroughBarChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h2>Monthly Arrest Trends</h2>
+            <p class="chart-subtitle">
+                Sample monthly pattern for demonstration. Can be wired to real data.
+            </p>
+            <canvas id="monthlyLineChart"></canvas>
+        </div>
+    </section>
+
+    <section class="dashboard-footer-note">
+        <h2 class="visually-hidden">Dashboard Notes</h2>
+        <p>
+            This dashboard is a High-level overview. For detailed analysis, use the 
+            <a href="/arrests/filter">Filter & Search</a> tools and the 
+            <a href="/trends/monthly">Monthly</a> / <a href="/trends/weekly">Weekly Trends</a> views.
+        </p>
+    </section>
+</section>
+
+{{!-- UPDATED: expose DB borough chart data to client-side JS --}}
+<script>
+    window.boroughChartData = {{{asJSON boroughChartData}}};
+</script>

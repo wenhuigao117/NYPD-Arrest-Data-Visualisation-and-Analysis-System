@@ -1,0 +1,61 @@
+<div class="arrest-details-container">
+  <h1 class="page-title">Arrest Details</h1>
+
+  <div class="arrest-info-details">
+    <p><strong>Offense:</strong> {{arrest.offense_description}}</p>
+    <p><strong>Borough:</strong> {{arrest.borough}}</p>
+    <p><strong>Date:</strong> {{arrest.arrest_date}}</p>
+    <p><strong>Precinct:</strong> {{arrest.precinct}}</p>
+    <p><strong>Law Category:</strong> {{arrest.law_category}}</p>
+    <p><strong>Age Group:</strong> {{arrest.age_group}}</p>
+    <p><strong>Gender:</strong> {{arrest.gender}}</p>
+    <p><strong>Race:</strong> {{arrest.race}}</p>
+
+    <p><strong>Latitude:</strong> {{arrest.arrest_location.latitude}}</p>
+    <p><strong>Longitude:</strong> {{arrest.arrest_location.longitude}}</p>
+  </div>
+
+  {{#if user}}
+  <input type="hidden" id="userId" value="{{user._id}}">
+  {{/if}}
+  <input type="hidden" id="arrestId" value="{{arrest._id}}">
+
+  <div class="action-buttons-container">
+    <a class="back-link btn btn-secondary" href="/arrests">Back to Arrest List</a>
+  </div>
+
+  <div id="map" data-lat="{{arrest.arrest_location.latitude}}" data-lon="{{arrest.arrest_location.longitude}}"
+    style="height: 350px; width: 80%; border: 1px solid #ccc; margin: 20px auto; border-radius: 0.5rem;">
+  </div>
+
+  {{!-- TEMP: map.js already loaded in main.handlebars; commenting to avoid double init --}}
+  {{!-- <script src="/public/js/map.js"></script> --}}
+  <script src="/public/js/favorites.js"></script>
+  <hr>
+
+  <h2 class="text-center">Comments</h2>
+  <ul id="commentSection"></ul>
+
+  <div id="comments-area">
+    <p>Loading comments...</p>
+  </div>
+
+  <hr>
+
+  <script src="/public/js/comments.js"></script>
+
+  {{#if user}}
+  <h3 class="text-center">Add a Comment</h3>
+
+  <form id="comment-form" class="comment-form-centered">
+    <input type="hidden" id="commentArrestId" value="{{arrest._id}}">
+    <input type="hidden" id="commentUserId" value="{{user._id}}">
+
+    <textarea id="comment-text" rows="3" placeholder="Write your comment here..."></textarea>
+    <br>
+    <button type="submit" class="btn-primary">Submit Comment</button>
+  </form>
+  {{else}}
+  <p class="text-center"><a href="/users/login">Log in</a> to add a comment.</p>
+  {{/if}}
+</div>

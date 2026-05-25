@@ -1,0 +1,25 @@
+<div class="comment-container">
+
+    <h1 class="page-title">My Comments</h1>
+
+    {{#if comments.length}}
+    <ul class="comment-list">
+        {{#each comments}}
+        <li class="comment-item">
+            <p class="comment-text">{{this.text}}</p>
+            <p class="comment-meta">
+                On Arrest:
+                <a href="/arrests/{{this.arrestId}}">
+                    View Arrest →
+                </a>
+                <br>
+                <small>{{this.createdAt}}</small>
+            </p>
+            <hr>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p>You have not written any comments yet.</p>
+    {{/if}}
+</div>

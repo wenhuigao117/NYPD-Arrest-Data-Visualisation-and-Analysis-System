@@ -1,0 +1,15 @@
+{{!-- error page placeholder --}}
+<div class="error-container">
+  <div class="error-content">
+    <h1 class="error-code">{{statusCode}}</h1>
+    <h2 class="error-title">{{title}}</h2>
+    <p class="error-message">{{message}}</p>
+    
+    <div class="error-actions">
+      <a href="/" class="btn btn-primary">Go Back Home</a>
+      {{#if user}}
+        <a href="/arrests" class="btn btn-secondary">View Arrests</a>
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+{{!-- search page placeholder --}}
+{{!-- file name: views/search.handlebars --}}
+{{!-- last edited on: Dec 04, 2025 - Shravani --}}
+
+<h1>Search Arrest Records</h1>
+<p class="search-helper-text">
+    Use a keyword related to the offense description to look up matching arrests. 
+    For example: <em>ROBBERY</em>, <em>BURGLARY</em>, <em>ASSAULT</em>, etc.
+</p>
+
+{{!-- Server-sode error from routes/arrests.js, if any --}}
+{{#if error}}  
+    <p id="search-error" class="error">{{error}}</p>
+{{else}}
+    <p id="search-error" class="error"></p>
+{{/if}}
+
+<form id="search-form" method="get" action="/arrests/search">
+    <label for="keyword">Keyword:</label>
+    <input 
+        type="text"
+        id="keyword"
+        name="keyword"
+        value="{{keyword}}"
+        placeholder="Type a keyword here"
+        autocomplete="off"
+    >
+    
+    <button type="submit">Search</button>
+</form>
+
+<br>
+
+{{!-- edited this part a bit at the end to match other styles --}}
+{{#if results}}
+  {{#if results.length}}
+
+    <div class="search-results-page">
+      <div class="search-results-container">
+
+        <h3 class="text-center">Search Results ({{results.length}} records)</h3>
+
+        <div class="search-cards">
+          {{#each results}}
+            <div class="search-card">
+              <div class="search-offense">
+                <a href="/arrests/{{this._id}}">
+                  {{this.offense_description}}
+                </a>
+              </div>
+
+              <div class="search-meta">
+                <span><strong>Borough:</strong> {{this.borough}}</span>
+                <span><strong>Date:</strong> {{this.arrest_date}}</span>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+
+      </div>
+    </div>
+
+  {{else}}
+    <p class="no-results">No arrests matched to your search</p>
+  {{/if}}
+{{/if}}
+
+{{!-- Little bit of client-side checks (non-blocking, just user-friendly) --}}
+<script src="/public/js/search.js"></script>

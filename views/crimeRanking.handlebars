@@ -1,0 +1,37 @@
+<div class="ranking-container">
+  <h1>NYC Crime Category Ranking</h1>
+  <p class="subtitle">Identifying the Most Frequent Offenses Citywide</p>
+  <p class="total-info">Based on {{totalRecords}} arrest records across all 5 NYC boroughs</p>
+  
+  <div class="ranking-list">
+    {{#each ranking}}
+      <div class="ranking-item">
+        <div class="rank-badge">
+          <span class="rank-number">#{{math @index "+" 1}}</span>
+        </div>
+        
+        <div class="crime-info">
+          <h3 class="offense-title">{{this.offense}}</h3>
+          <span class="law-badge law-{{this.lawCategory}}">
+            {{this.lawCategory}}
+          </span>
+        </div>
+        
+        <div class="crime-stats">
+          <div class="stat-item">
+            <span class="stat-value">{{this.count}}</span>
+            <span class="stat-label">arrests</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">{{this.percentage}}%</span>
+            <span class="stat-label">of total</span>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  
+  <div class="back-nav">
+    <a href="/arrests" class="back-link">← Back to Arrest List</a>
+  </div>
+</div>

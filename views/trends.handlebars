@@ -1,0 +1,52 @@
+<div class="trends-container">
+  <h1 class="trends-title">{{title}}</h1>
+
+  {{#if trends.length}}
+    <!-- Chart Container -->
+    <div class="trends-chart-wrapper">
+      <canvas id="trendChart"></canvas>
+    </div>
+
+    <!-- Table -->
+    <div class="trends-table-wrapper">
+      <table class="trends-table">
+        <thead>
+          <tr>
+            {{#if (eq type "month")}}
+              <th>Month</th>
+            {{else}}
+              <th>Year</th>
+              <th>Week</th>
+            {{/if}}
+            <th>Total Arrests</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each trends}}
+            <tr>
+              {{#if (eq ../type "month")}}
+                <td>{{this.month}}</td>
+              {{else}}
+                <td>{{this.year}}</td>
+                <td>{{this.week}}</td>
+              {{/if}}
+              <td>{{this.totalArrests}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  {{else}}
+    <div class="no-data">
+      <p>No trend data available.</p>
+    </div>
+  {{/if}}
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  window.trendData = {{{asJSON trends}}};
+  window.trendType = "{{type}}";
+</script>
+<script src="/public/js/trendsChart.js"></script>
