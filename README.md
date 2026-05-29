@@ -2,7 +2,7 @@
 
 A full-stack web application that transforms raw NYPD arrest data into an interactive analytics platform. Users can explore arrest patterns across time, geography, and demographics through data visualizations, advanced filtering, and statistical dashboards.
 
-**Live Demo**: *(coming soon)*  
+**Live Demo: http://13.58.41.101
 **Tech Stack**: Node.js · Express.js · MongoDB · Handlebars · Chart.js
 
 ---
