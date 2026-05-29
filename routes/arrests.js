@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { requireAuth } from "../middleware/auth.js";
 const router = Router();
 import {
   getAllArrests,
@@ -108,7 +109,7 @@ router.get("/filter", async (req, res) => {
 });
 
 // Crime Category Ranking - must be before /:id route
-router.get("/ranking", async (req, res) => {
+router.get("/ranking", requireAuth, async (req, res) => {
   try {
     const limit = req.query.limit ? parseInt(req.query.limit) : 10;
     const ranking = await getCrimeRanking(limit);
@@ -128,7 +129,7 @@ router.get("/ranking", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", requireAuth, async (req, res) => {
   try {
     const id = checkId(req.params.id, "id");
     const arrest = await getArrestById(id);
@@ -138,7 +139,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.get("/:id/comments", async (req, res) => {
+router.get("/:id/comments", requireAuth, async (req, res) => {
   try {
     const id = checkId(req.params.id);
     const comments = await commentsData.getCommentsByArrestId(id);
@@ -149,7 +150,7 @@ router.get("/:id/comments", async (req, res) => {
 });
 
 // Export filtered results to CSV
-router.get("/filter/export/csv", async (req, res) => {
+router.get("/filter/export/csv", requireAuth, async (req, res) => {
   try {
     const filters = req.query;
     
@@ -204,7 +205,7 @@ router.get("/filter/export/csv", async (req, res) => {
 });
 
 // Export filtered results to PDF
-router.get("/filter/export/pdf", async (req, res) => {
+router.get("/filter/export/pdf", requireAuth, async (req, res) => {
   try {
     const { PDFDocument, rgb, StandardFonts } = await import('pdf-lib');
     const filters = req.query;

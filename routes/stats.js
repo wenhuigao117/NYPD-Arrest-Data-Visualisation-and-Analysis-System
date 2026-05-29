@@ -1,12 +1,13 @@
 // routes/stats.js
 
 import { Router } from 'express';
+import { requireAuth } from '../middleware/auth.js';
 import * as arrestsData from '../data/arrests.js';
 
 const router = Router();
 
 // GET /stats - Statistical Dashboard with real data
-router.get('/', async (req, res) => {
+router.get('/', requireAuth, async (req, res) => {
     try {
         // Fetch real demographic data
         const demographicData = await arrestsData.getDemographicData();
@@ -108,7 +109,7 @@ function getBoroughName(code) {
 }
 
 // GET /stats/demographics - Fetch demographic data
-router.get('/demographics', async (req, res) => {
+router.get('/demographics', requireAuth, async (req, res) => {
     try {
         const demographicData = await arrestsData.getDemographicData();
         res.json(demographicData);

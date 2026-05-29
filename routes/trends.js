@@ -4,7 +4,7 @@ import trendsData from "../data/trends.js";
 const router = express.Router();
 
 // UPDATED: /monthly supports ?format=json for API-style responses
-router.route("/monthly").get(async (req, res) => {
+router.route("/monthly").get(requireAuth, async (req, res) => {
   try {
     const monthlyTrends = await trendsData.getMonthlyTrends();
 
@@ -26,7 +26,7 @@ router.route("/monthly").get(async (req, res) => {
 });
 
 // updated a bit to support weekly trend for ?format=json
-router.route("/weekly").get(async (req, res) => {
+router.route("/weekly").get(requireAuth, async (req, res) => {
   try {
     const weeklyTrends = await trendsData.getWeeklyTrends();
 
