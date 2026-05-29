@@ -19,3 +19,34 @@ $(document).ready(function() {
     }
   });
 });
+// Mobile dropdown toggle
+document.addEventListener('DOMContentLoaded', function() {
+  const toggles = document.querySelectorAll('.dropdown-toggle');
+  
+  toggles.forEach(function(toggle) {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parent = this.closest('.nav-dropdown');
+      const isOpen = parent.classList.contains('open');
+      
+      // 关闭所有其他下拉
+      document.querySelectorAll('.nav-dropdown').forEach(function(d) {
+        d.classList.remove('open');
+      });
+      
+      // 切换当前
+      if (!isOpen) {
+        parent.classList.add('open');
+      }
+    });
+  });
+
+  // 点击页面其他地方关闭所有下拉
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav-dropdown')) {
+      document.querySelectorAll('.nav-dropdown').forEach(function(d) {
+        d.classList.remove('open');
+      });
+    }
+  });
+});

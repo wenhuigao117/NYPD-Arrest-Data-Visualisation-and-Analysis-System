@@ -2637,3 +2637,8 @@ body.dark-mode .search-card {
 body.dark-mode .search-meta {
   color: #d1d5db;
 }
+
+/* Mobile dropdown open state */
+.nav-dropdown.open .dropdown-menu {
+  display: block !important;
+}
