@@ -2,6 +2,19 @@
 // public/js/main.js
 $(document).ready(function() {
   console.log('NYC Arrests App - Client scripts loaded');
+
+  // 汉堡菜单
+  $('#hamburger').on('click', function(e) {
+    e.stopPropagation();
+    $('#nav-links').toggleClass('open');
+  });
+
+  // 点击其他地方关闭
+  $(document).on('click', function(e) {
+    if (!$(e.target).closest('#hamburger, #nav-links').length) {
+      $('#nav-links').removeClass('open');
+    }
+  });
   
   // Prevent double form submission
   $('form').on('submit', function() {
@@ -21,16 +34,6 @@ $(document).ready(function() {
 });
 // Mobile dropdown toggle
 document.addEventListener('DOMContentLoaded', function() {
-  // 汉堡菜单
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', function(e) {
-      e.stopPropagation();
-      navLinks.classList.toggle('open');
-    });
-  }
-
   const toggles = document.querySelectorAll('.dropdown-toggle');
   
   toggles.forEach(function(toggle) {
