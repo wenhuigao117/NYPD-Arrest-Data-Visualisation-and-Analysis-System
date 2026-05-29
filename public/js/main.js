@@ -71,6 +71,3 @@ window.addEventListener('scroll', function() {
   });
 });
 
-// 汉堡菜单
-window.addEventListener('load', function() {
-});
