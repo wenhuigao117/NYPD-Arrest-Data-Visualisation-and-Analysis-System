@@ -21,6 +21,16 @@ $(document).ready(function() {
 });
 // Mobile dropdown toggle
 document.addEventListener('DOMContentLoaded', function() {
+  // 汉堡菜单
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      navLinks.classList.toggle('open');
+    });
+  }
+
   const toggles = document.querySelectorAll('.dropdown-toggle');
   
   toggles.forEach(function(toggle) {
