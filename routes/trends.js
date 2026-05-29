@@ -1,4 +1,5 @@
 import express from "express";
+import { requireAuth } from "../middleware/auth.js";
 import trendsData from "../data/trends.js";
 
 const router = express.Router();
