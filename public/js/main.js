@@ -73,13 +73,4 @@ window.addEventListener('scroll', function() {
 
 // 汉堡菜单
 window.addEventListener('load', function() {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
-
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', function(e) {
-      e.stopPropagation();
-      navLinks.classList.toggle('open');
-    });
-  }
 });
