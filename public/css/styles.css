@@ -897,7 +897,8 @@ form input:focus {
   border-radius: 0 0 4px 4px;
 }
 
-.nav-dropdown:hover .dropdown-menu {
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown.open .dropdown-menu {
   display: block;
 }
 
@@ -2638,7 +2639,4 @@ body.dark-mode .search-meta {
   color: #d1d5db;
 }
 
-/* Mobile dropdown open state */
-.nav-dropdown.open .dropdown-menu {
-  display: block !important;
-}
+
