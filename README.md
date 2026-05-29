@@ -467,4 +467,35 @@ open http://localhost:3000
 
 ---
 
-*Built as a final project for CS-546 Web Programming at Stevens Institute of Technology, Fall 2025.*
+---
+
+## Cloud Deployment
+
+### Production Stack
+
+| Component | Service | Details |
+|-----------|---------|---------|
+| Server | AWS EC2 t3.micro | Ubuntu 26.04 LTS, us-east-2 |
+| Database | MongoDB Atlas M0 | Free tier, AWS us-east-1 |
+| Process Manager | PM2 | Auto-restart, boot persistence via systemd |
+| Reverse Proxy | Nginx 1.28 | Port 80 -> 3000, proxy headers |
+
+**Live Demo**: http://13.58.41.101
+
+### Architecture
+### Key Linux Commands
+
+```bash
+ssh -i nyc-arrest-key.pem ubuntu@13.58.41.101
+pm2 status && pm2 logs nyc-arrest
+git pull origin main && pm2 restart nyc-arrest
+sudo systemctl restart nginx
+```
+
+### Design Decisions
+
+**PM2**: Process resurrection on crash, log rotation, systemd boot persistence.
+
+**Nginx reverse proxy**: Decouples HTTP layer from app. Extensible with SSL and rate limiting without touching application code.
+
+**MongoDB Atlas**: Managed database offloads backups and failover. App only needs a connection string.
