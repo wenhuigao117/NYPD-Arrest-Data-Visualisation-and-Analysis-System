@@ -57,3 +57,15 @@ window.addEventListener('scroll', function() {
     d.classList.remove('open');
   });
 });
+
+// 汉堡菜单
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      navLinks.classList.toggle('open');
+    });
+  }
+});

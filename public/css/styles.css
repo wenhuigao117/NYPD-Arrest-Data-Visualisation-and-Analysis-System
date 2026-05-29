@@ -2652,3 +2652,44 @@ html body nav .nav-dropdown.open .dropdown-menu {
   visibility: visible !important;
   opacity: 1 !important;
 }
+
+/* ===== 汉堡菜单 ===== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 992px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+  }
+
+  .nav-links.open {
+    display: flex !important;
+  }
+
+  .nav-container {
+    flex-wrap: wrap;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
