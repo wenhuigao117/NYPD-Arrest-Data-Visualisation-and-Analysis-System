@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 点击页面其他地方关闭所有下拉
   document.addEventListener('click', function(e) {
-    if (!e.target.closest('.nav-dropdown')) {
+    if (!e.target.closest('.nav-dropdown') && !e.target.closest('#hamburger') && !e.target.closest('#nav-links')) {
       document.querySelectorAll('.nav-dropdown').forEach(function(d) {
         d.classList.remove('open');
       });
