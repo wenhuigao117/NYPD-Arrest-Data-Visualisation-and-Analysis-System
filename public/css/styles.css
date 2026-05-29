@@ -2640,3 +2640,10 @@ body.dark-mode .search-meta {
 }
 
 
+
+/* Force dropdown open state - highest priority */
+html body nav .nav-dropdown.open .dropdown-menu {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
