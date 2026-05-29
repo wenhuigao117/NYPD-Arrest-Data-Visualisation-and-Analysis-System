@@ -50,3 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+// 滚动时关闭所有下拉菜单
+window.addEventListener('scroll', function() {
+  document.querySelectorAll('.nav-dropdown').forEach(function(d) {
+    d.classList.remove('open');
+  });
+});
