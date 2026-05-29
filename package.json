@@ -13,6 +13,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.5.1",
+    "dotenv": "^17.4.2",
     "express": "^4.19.0",
     "express-handlebars": "^7.1.2",
     "express-session": "^1.17.3",

@@ -2,6 +2,8 @@
 // Main application entry point
 // Express server configuration with session support, middleware, and error handling
 
+import * as dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import session from 'express-session';
 import exphbs from 'express-handlebars';
@@ -46,7 +48,7 @@ app.use(rewriteUnsupportedBrowserMethods);
 app.use(
   session({
     name: 'AuthCookie',
-    secret: 'some secret string',
+    secret: process.env.SESSION_SECRET || 'some secret string',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -101,7 +103,8 @@ app.use(notFoundHandler);  // Handle 404
 app.use(errorHandler);     // Handle all other errors
 
 // Start server
-app.listen(3000, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
   console.log("We've now got a server!");
-  console.log('Your routes will be running on http://localhost:3000');
+  console.log(`Your routes will be running on http://localhost:${PORT}`);
 });
