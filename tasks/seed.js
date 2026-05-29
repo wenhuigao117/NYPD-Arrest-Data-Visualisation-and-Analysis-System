@@ -37,6 +37,17 @@ const main = async () => {
     console.log('\n=== Step 3: Transforming and cleaning data ===');
     const cleanedData = sampledData.map(transformArrestRecord);
     console.log(`Cleaned ${cleanedData.length} records`);
+    // Step 3.5: Data quality report
+    console.log('\n=== Data Quality Report ===');
+    const qualityReport = validateDataQuality(cleanedData);
+    console.log(`  Total records: ${qualityReport.total}`);
+    console.log(`  Missing coordinates: ${qualityReport.missingCoords} (${qualityReport.missingCoordsRate}%)`);
+    console.log(`  Missing offense: ${qualityReport.missingOffense}`);
+    console.log(`  Unknown gender: ${qualityReport.unknownGender}`);
+    console.log(`  Unknown race: ${qualityReport.unknownRace}`);
+    console.log(`  Borough dist: ${JSON.stringify(qualityReport.boroughDist)}`);
+    console.log(`  Law category dist: ${JSON.stringify(qualityReport.lawCatDist)}`);
+
 
     // Step 4: Insert arrests into database
     console.log('\n=== Step 4: Inserting arrests into database ===');
@@ -177,13 +188,37 @@ function randomSample(array, n) {
 
 // Transform API record to match our database schema
 // Handles field name mapping and data type conversions
+function validateDataQuality(records) {
+  const total = records.length;
+  const missingCoords = records.filter(r => !r.arrest_location.latitude || !r.arrest_location.longitude).length;
+  const missingOffense = records.filter(r => r.offense_description === 'UNKNOWN OFFENSE').length;
+  const unknownGender = records.filter(r => r.gender === 'U').length;
+  const unknownRace = records.filter(r => r.race === 'UNKNOWN').length;
+
+  const boroughDist = {};
+  const lawCatDist = {};
+  for (const r of records) {
+    boroughDist[r.borough] = (boroughDist[r.borough] || 0) + 1;
+    lawCatDist[r.law_category] = (lawCatDist[r.law_category] || 0) + 1;
+  }
+
+  return { total, missingCoords, missingCoordsRate: ((missingCoords / total) * 100).toFixed(1),
+    missingOffense, unknownGender, unknownRace, boroughDist, lawCatDist };
+}
+
 function transformArrestRecord(record) {
   return {
     arrest_date: record.arrest_date || new Date().toISOString().split('T')[0],
     borough: (record.arrest_boro || 'M').toUpperCase(),
     precinct: parseInt(record.arrest_precinct) || 1,
     offense_description: record.ofns_desc || 'UNKNOWN OFFENSE',
-    law_category: (record.law_cat_cd || 'misdemeanor').toLowerCase(),
+    law_category: (() => {
+      const raw = (record.law_cat_cd || '').toLowerCase().trim();
+      if (raw === 'f' || raw === 'felony') return 'felony';
+      if (raw === 'v' || raw === 'violation') return 'violation';
+      if (raw === 'm' || raw === 'misdemeanor') return 'misdemeanor';
+      return 'misdemeanor'; // default fallback
+    })(),
     age_group: record.age_group || 'null',
     gender: (record.perp_sex || 'U').toUpperCase(),
     race: (record.perp_race || 'UNKNOWN').toUpperCase(),
