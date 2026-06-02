@@ -219,8 +219,8 @@ function transformArrestRecord(record) {
       if (raw === 'm' || raw === 'misdemeanor') return 'misdemeanor';
       return 'misdemeanor'; // default fallback
     })(),
-    age_group: record.age_group || 'null',
-    gender: (record.perp_sex || 'U').toUpperCase(),
+    age_group: (record.age_group && record.age_group !== 'null' && record.age_group !== '(null)') ? record.age_group : 'Unknown',
+    gender: (record.perp_sex && record.perp_sex !== '(null)' && record.perp_sex.toUpperCase() !== 'U') ? record.perp_sex.toUpperCase() : 'Unknown',
     race: (record.perp_race || 'UNKNOWN').toUpperCase(),
     arrest_location: {
       latitude: parseFloat(record.latitude) || null,
@@ -403,5 +403,10 @@ async function seedSampleComments() {
   }
 }
 
-// Run the seeding script
-main().catch(console.error);
+// Run the seeding script only if executed directly
+const isMain = process.argv[1] && process.argv[1].includes("seed.js");
+if (isMain) {
+  main().catch(console.error);
+}
+
+export { main as seedDatabase };

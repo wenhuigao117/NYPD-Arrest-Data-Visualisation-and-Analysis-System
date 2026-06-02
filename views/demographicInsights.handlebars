@@ -4,6 +4,13 @@
     <p class="header-subtitle">Comprehensive analysis of NYC arrest patterns by demographics</p>
   </header>
 
+  {{#unless user}}
+  <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:16px 24px;margin:16px 0;display:flex;align-items:center;gap:12px;">
+    <span style="font-size:1.2rem;">🔒</span>
+    <span>Please <a href="/users/login" style="color:#0056b3;font-weight:600;">sign in</a> to view demographic insights and analytics.</span>
+  </div>
+  {{/unless}}
+
   <!-- Key Statistics Summary - Moved to Top -->
   <section class="key-stats-section">
     <h2 class="visually-hidden">Key Demographic Statistics</h2>

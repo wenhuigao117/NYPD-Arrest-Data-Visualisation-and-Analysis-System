@@ -64,7 +64,7 @@ const createArrest = async (
 
   age_group = checkString(age_group, "age_group");
 
-  const validAgeGroups = ["<18", "18-24", "25-44", "45-64", "65+", "null"];
+  const validAgeGroups = ["<18", "18-24", "25-44", "45-64", "65+", "null", "Unknown"];
   if (!validAgeGroups.includes(age_group)) {
     throw "Error: age_group must be one of <18, 18-24, 25-44, 45-64, 65+, null";
   }
@@ -90,7 +90,7 @@ const createArrest = async (
   }
 
   gender = checkString(gender, "gender");
-  const validGenders = ["M", "F", "U"];
+  const validGenders = ["M", "F", "U", "Unknown"];
   if (!validGenders.includes(gender.toUpperCase())) {
     throw "Error: gender must be 'M', 'F', or 'U'";
   }

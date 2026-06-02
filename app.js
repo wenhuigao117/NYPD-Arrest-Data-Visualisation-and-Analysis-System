@@ -4,6 +4,8 @@
 
 import * as dotenv from 'dotenv';
 dotenv.config();
+import cron from 'node-cron';
+import { seedDatabase } from './tasks/seed.js';
 import express from 'express';
 import session from 'express-session';
 import exphbs from 'express-handlebars';
@@ -84,6 +86,12 @@ const handlebarsInstance = exphbs.create({
     // Equality helper for comparisons in templates
     eq: (a, b) => {
       return a === b;
+    },
+
+    // Date formatting helper
+    formatDate: (dateStr) => {
+      if (!dateStr) return 'Unknown';
+      return String(dateStr).split('T')[0];
     }
   },
   partialsDir: ['views/partials/']
@@ -101,6 +109,19 @@ configRoutes(app);
 // Error handling middleware (must be last)
 app.use(notFoundHandler);  // Handle 404
 app.use(errorHandler);     // Handle all other errors
+
+
+// Scheduled data refresh - runs daily at 3:00 AM
+cron.schedule('0 3 * * *', async () => {
+  console.log('[Cron] Starting scheduled data refresh at', new Date().toISOString());
+  try {
+    await seedDatabase();
+    console.log('[Cron] Data refresh completed successfully');
+  } catch (err) {
+    console.error('[Cron] Data refresh failed:', err.message);
+  }
+});
+console.log('[Cron] Daily data refresh scheduled for 3:00 AM');
 
 // Start server
 const PORT = process.env.PORT || 3000;
