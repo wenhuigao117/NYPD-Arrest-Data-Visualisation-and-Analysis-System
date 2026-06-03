@@ -1,0 +1,33 @@
+borough,law_category,count
+Brooklyn,f,8399
+Queens,,36
+Staten Island,f,997
+Queens,9,140
+Bronx,m,9453
+Bronx,9,18
+Bronx,v,101
+Staten Island,9,3
+Queens,f,5545
+Staten Island,i,1
+Bronx,i,11
+Queens,m,8200
+Brooklyn,i,23
+Brooklyn,,36
+Queens,v,231
+Staten Island,,2
+Brooklyn,9,22
+Staten Island,m,1547
+Brooklyn,v,725
+Manhattan,f,5965
+Brooklyn,m,11905
+Manhattan,9,27
+Bronx,f,5983
+Manhattan,m,9656
+Manhattan,,147
+Manhattan,v,65
+Bronx,,46
+Queens,i,8
+Manhattan,i,10
+Staten Island,v,1
+Brooklyn,(null),1
+Bronx,(null),1
