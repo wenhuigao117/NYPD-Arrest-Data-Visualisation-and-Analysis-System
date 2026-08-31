@@ -303,20 +303,10 @@ function generateRandomLongitude() {
 }
 
 // Seed test users for development and testing
-// Creates real team member accounts and test users with hashed passwords
 async function seedTestUsers() {
   const usersCollection = await users();
   
   const testUsers = [
-    // Team member: Wenhui Gao (Infrastructure Lead)
-    {
-      username: 'wenhuigao',
-      email: 'gwhb070802@gmail.com',
-      password: await bcrypt.hash('Wenhui2025!', 10),
-      createdAt: new Date(),
-      favorites: [],
-      comments: []
-    },
     // Generic test user for development
     {
       username: 'testuser',
@@ -339,9 +329,6 @@ async function seedTestUsers() {
 
   const insertResult = await usersCollection.insertMany(testUsers);
   console.log(`Created ${insertResult.insertedCount} test users`);
-  console.log('  - wenhuigao / Wenhui2025！');
-  console.log('  - testuser (P password23@)');
-  console.log('  - admin (Admin123&)');
   
   return insertResult;
 }

@@ -398,7 +398,6 @@ open http://localhost:3000
 - Add **interactive map** using Leaflet.js or Mapbox to plot arrest locations geographically
 - Implement **sorting** on the browse and search pages (by date, borough, offense type)
 - Add **database indexes** on high-frequency filter fields for query performance at scale
-- Deploy to **AWS** (RDS + Elastic Beanstalk + Amplify)
 
 ---
 
@@ -498,4 +497,4 @@ sudo systemctl restart nginx
 
 **Nginx reverse proxy**: Decouples HTTP layer from app. Extensible with SSL and rate limiting without touching application code.
 
-**MongoDB Atlas**: Managed database offloads backups and failover. App only needs a connection string.
+**MongoDB Atlas**: Managed MongoDB deployment accessed through an environment-based connection string.

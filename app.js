@@ -4,8 +4,6 @@
 
 import * as dotenv from 'dotenv';
 dotenv.config();
-import cron from 'node-cron';
-import { seedDatabase } from './tasks/seed.js';
 import express from 'express';
 import session from 'express-session';
 import exphbs from 'express-handlebars';
@@ -110,18 +108,6 @@ configRoutes(app);
 app.use(notFoundHandler);  // Handle 404
 app.use(errorHandler);     // Handle all other errors
 
-
-// Scheduled data refresh - runs daily at 3:00 AM
-cron.schedule('0 3 * * *', async () => {
-  console.log('[Cron] Starting scheduled data refresh at', new Date().toISOString());
-  try {
-    await seedDatabase();
-    console.log('[Cron] Data refresh completed successfully');
-  } catch (err) {
-    console.error('[Cron] Data refresh failed:', err.message);
-  }
-});
-console.log('[Cron] Daily data refresh scheduled for 3:00 AM');
 
 // Start server
 const PORT = process.env.PORT || 3000;
